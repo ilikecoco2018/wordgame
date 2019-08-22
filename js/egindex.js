@@ -16,13 +16,13 @@ window.onload = function ( ) {
 
         }
 
-        makeWord(num=5) {
+        makeWord(num=4) {
             for (let i=0;i<num;i++) {
                 let div = document.createElement("div");
                 div.classList.add("letter");
-                let letter = String.fromCharCode(parseInt(Math.random() * 26 + 65));
+                let letter = Math.floor(Math.random() *5+1);
                 while (this.isRepeat(letter)){
-                    letter = String.fromCharCode(parseInt(Math.random() * 26 + 65));
+                    letter = Math.floor(Math.random() * 5+1);
                 }
                 let left = Math.random() * 4;
                 while (this.isOverlap(left)){
@@ -32,7 +32,7 @@ window.onload = function ( ) {
                 while (this.isTopeat(top)){
                     top = Math.random()*(-4)+0.2;
                 }
-                div.setAttribute("style", `background: url("img/A_Z/${letter}.png");top:${top}rem;left:${left}rem;`)
+                div.setAttribute("style", `background: url("egimg/${letter}.jpg");top:${top}rem;left:${left}rem;`)
                 this.screen.appendChild(div);
                 let obj ={}
                 obj['title']=letter
@@ -84,7 +84,7 @@ window.onload = function ( ) {
         run(){
             this.t = setInterval(()=> {
                 this.letters.forEach((item,index)=>{
-                    item.top+=0.01;
+                    item.top+=0.015;
                     item.node.style.top = item.top+'rem';
                     if (item.top>5){
                         //清除字母
@@ -115,7 +115,7 @@ window.onload = function ( ) {
                         }
                     }
                 })
-            },15)
+            },8)
         }
         //开关暂停
         pauseButtonFF(){
@@ -145,6 +145,24 @@ window.onload = function ( ) {
                 let tar = event.target;
                 if (tar.nodeName == "SPAN"){
                     let value = tar.innerText;
+                    if(value == "杨登辉"){
+                        value = 4
+                    }
+                    if(value == "石小蕾"){
+                        value = 2
+                    }
+                    if(value == "刘钊"){
+                        value = 1
+                    }
+                    if(value == "岳英俊"){
+                        value = 6
+                    }
+                    if(value == "王国栋"){
+                        value = 3
+                    }
+                    if(value == "严武军"){
+                        value = 5
+                    }
                     let index = game.letters.findIndex((item)=>{
                         if (value == item.title){
                             return item;
@@ -187,7 +205,6 @@ window.onload = function ( ) {
                 game.lifeValue.innerHTML = 100;//生命值恢复
                 game.integralValue.innerText = 0;//积分值恢复
                 game.pauseButtonFF()//开关恢复
-
             }
         }
     }
@@ -197,9 +214,5 @@ window.onload = function ( ) {
     game.pauseButtonFF();
     game.delWord()
     game.btnEle()
-
-
-
-
 
 }
